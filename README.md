@@ -2,12 +2,14 @@
 
 First, run the development server:
 
+in /backend file:
+
 ```bash
 npm start
 
 ```
 
-Next, for wake up the frontend:
+Next, in /frontend file
 
 ```bash
 npm run dev
