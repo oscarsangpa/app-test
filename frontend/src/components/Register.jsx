@@ -1,12 +1,12 @@
 import { useNavigate } from "react-router-dom";
-import { loginUser } from "../services/userServices";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import "../App.css";
+import { registerUser } from "../services/userServices";
 
 const schema = yup
   .object({
+    name: yup.string().required("Field name is required"),
     email: yup
       .string()
       .email("Please enter a valid email format")
@@ -15,7 +15,7 @@ const schema = yup
   })
   .required();
 
-function Login() {
+function Register() {
   const navigate = useNavigate();
   const {
     register,
@@ -26,10 +26,10 @@ function Login() {
   });
 
   const onSubmit = (data) => {
-    if (!data) return console.log("Ups...something went wrong!");
+    if (!data) console.log("Ups... Something went wrong!");
 
-    loginUser(data)
-      .then(() => navigate("/home"))
+    registerUser(data)
+      .then(() => navigate("/login"))
       .catch((err) => console.error(err?.response?.data?.errors));
   };
 
@@ -37,12 +37,22 @@ function Login() {
     <>
       <div>
         <h2>
-          Welcome to
-          <span className="name">WEJYC</span> test!
+          Welcome to <span className="name">WEJYC</span> test!
         </h2>
       </div>
       <div className="container">
         <form className="form" onSubmit={handleSubmit(onSubmit)}>
+          <div>
+            <label htmlFor="name">Name</label>
+            <input
+              {...register("name")}
+              id="name"
+              name="name"
+              type="text"
+              placeholder="Jhon Doe"
+            />
+            {errors && <p className="errors">{errors.name?.message}</p>}
+          </div>
           <div>
             <label htmlFor="email">Email</label>
             <input
@@ -64,12 +74,12 @@ function Login() {
             />
             {errors && <p className="errors">{errors.password?.message}</p>}
           </div>
-          <input type="submit" value="Login" />
+          <input type="submit" value="Register" />
         </form>
         <div>
           <p>
-            Do not have an account?
-            <span onClick={() => navigate("/")}> Sign up </span>
+            Already have an account?
+            <span onClick={() => navigate("/login")}> Sign in </span>
           </p>
         </div>
       </div>
@@ -77,4 +87,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Register;
