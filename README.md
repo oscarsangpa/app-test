@@ -2,14 +2,14 @@
 
 First, run the development server:
 
-in /backend file:
+in /backend folder:
 
 ```bash
 npm start
 
 ```
 
-Next, in /frontend file
+Next, in /frontend folder
 
 ```bash
 npm run dev
