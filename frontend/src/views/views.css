@@ -1,0 +1,16 @@
+.home {
+  display: flex;
+  flex-direction: column;
+  margin-top: 30%;
+}
+
+.title {
+  text-align: center;
+  font-size: 3rem;
+}
+
+.options {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
